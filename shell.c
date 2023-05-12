@@ -1,4 +1,4 @@
-#include "main.h"
+#include "shell.h"
 
 #define MAX_WORDS 10
 

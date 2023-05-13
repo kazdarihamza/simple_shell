@@ -15,6 +15,8 @@ char **parse_input(char *input)
 	char *word;
 	int word_count = 0;
 
+	while (_isspace(*input))
+		input++;
 	word = _strtok(input, " ");
 	while (word != NULL && word_count < MAX_WORDS)
 	{

@@ -16,5 +16,6 @@ size_t _strcspn(const char *s1, const char *s2);
 char *_strcat(char *dest, char *src);
 char *_strcpy(char *dest, char *src);
 char *_strtok(char *str, const char *delim);
+int _isspace(int c);
 
 #endif

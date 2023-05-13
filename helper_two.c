@@ -38,3 +38,13 @@ int _strlen(char *s)
 
 	return (len);
 }
+/**
+ * _isspace - a fucntion checks if the char is not a space
+ * @c: the char
+ * Return: 0 for is not  space and 1 for it is a space
+*/
+int _isspace(int c)
+{
+	return (c == ' ' || c == '\t' || c == '\n' ||
+		c == '\r' || c == '\f' || c == '\v');
+}

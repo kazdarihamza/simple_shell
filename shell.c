@@ -37,10 +37,11 @@ char **parse_input(char *input)
 /**
 * run_command - executes the command based on the given array
 * @ls: the given array
+* @env: environment
 * Return: 0 on success
 */
 
-int run_command(char **ls)
+int run_command(char **ls, char **env)
 {
 	pid_t pid = fork();
 
@@ -51,7 +52,7 @@ int run_command(char **ls)
 	}
 	else if (pid == 0)
 	{
-		execve(ls[0], ls, NULL);
+		execve(ls[0], ls, env);
 		perror("Failed to execute command");
 		exit(EXIT_FAILURE);
 	}
@@ -63,18 +64,20 @@ int run_command(char **ls)
 
 /**
 * main - entry point
+* @ac: args count
+* @args: args vector
+* @env: environment
 * Return: 0 on success
 */
 
-int main(void)
+int main(int ac, char **args, char **env)
 {
 	char *input = NULL;
 	size_t size = 0;
 
+	(void) ac;
 	while (true)
 	{
-		char **ls = NULL;
-
 		print_string("$ ");
 		if (getline(&input, &size, stdin) == -1)
 		{
@@ -82,13 +85,18 @@ int main(void)
 		}
 		input[_strcspn(input, "\n")] = '\0';
 
-		ls = parse_input(input);
-		run_command(ls);
+		args = parse_input(input);
+		run_command(args, env);
 
-		free(ls);
+		free(args[0]);
+		free(args);
+		if (input != NULL)
+		{
+			free(input);
+			input = NULL;
+			size = 0;
+		}
 	}
-
-	free(input);
 	return (0);
 }
 

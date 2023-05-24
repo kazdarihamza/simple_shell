@@ -39,12 +39,14 @@ void handle_commands(char **cmd, char **env)
 	if (testStringInFolder("/bin/", cmd[0]))
 	{
 		execute_external_command(cmd, env);
-		free(cmd[0]);
+		if ((isatty(STDIN_FILENO)))
+			free(cmd[0]);
 	}
 	else if (_strlen(cmd[0]) > 5)
 	{
 		print_string(cmd[0] + 5);
 		print_string(": command not found.\n");
-		free(cmd[0]);
+		if ((isatty(STDIN_FILENO)))
+			free(cmd[0]);
 	}
 }

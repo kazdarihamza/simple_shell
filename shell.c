@@ -9,7 +9,8 @@
 
 int main(int ac, char **args)
 {
-	char *first = args[0], *big_env[MAX_WORDS], *input = NULL;
+	char *first = args[0];
+	char *big_env[MAX_WORDS], *input = NULL;
 	size_t n = 0;
 	ssize_t chars_read;
 	int i = 0, j = 0;
@@ -30,6 +31,7 @@ int main(int ac, char **args)
 			print_string("#cisfun$ ");
 		chars_read = _getline(&input, &n, stdin);
 		if (chars_read == -1)
+		{
 			free_all(input, args);
 		if (_strcmp(input, "\n") != 0)
 		{

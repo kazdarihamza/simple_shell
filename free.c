@@ -9,11 +9,7 @@
 void free_all(char *input, char **args)
 {
 	(void)args;
-	if ((isatty(STDIN_FILENO)))
-	{
-		if (input)
-			free(input);
-	}
+	(void)input;
 	if (!(isatty(STDIN_FILENO)))
 		exit(EXIT_SUCCESS);
 	exit(EXIT_FAILURE);

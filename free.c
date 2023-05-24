@@ -8,9 +8,9 @@
 
 void free_all(char *input, char **args)
 {
-	if (!(isatty(STDIN_FILENO)) && !_isspace(*input) && _strcmp(args[0], "cd") != 0)
-		free(args[0]);
-	if ((isatty(STDIN_FILENO)))
+	(void)args;
+
+	if (_strcmp(input, "\n") != 0 || input != NULL)
 		free(input);
 	if (!(isatty(STDIN_FILENO)))
 		exit(EXIT_SUCCESS);

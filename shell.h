@@ -80,5 +80,7 @@ size_t _strspn(const char *str, const char *charset);
 void handle_exit_command(char **args, char *input, char *first);
 void *_memcpy(void *dest, const void *src, size_t n);
 size_t malloc_usable_size(const void *ptr);
+int testStringInFolder(char *folderPath, char *searchString);
+void handle_commands(char **cmd, char **env);
 
 #endif

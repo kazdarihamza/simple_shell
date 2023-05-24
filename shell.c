@@ -1,8 +1,5 @@
 #include "shell.h"
 
-#define MAX_WORDS 1024
-#define BUFFER_SIZE 1024
-
 /**
 * main - entry point
 * @ac: args count
@@ -34,17 +31,15 @@ int main(int ac, char **args)
 		chars_read = _getline(&input, &n, stdin);
 		if (chars_read == -1)
 			free_all(input, args);
-		input[chars_read - 1] = '\0';
-		parse_input(input, args);
-		if (_strcmp(args[0], "/bin/exit") == 0)
-			handle_exit_command(args, input, first);
-		if (args != 0)
+		if (_strcmp(input, "\n") != 0)
 		{
-			run_command(args, big_env);
-			if ((isatty(STDIN_FILENO)))
+			input[chars_read - 1] = '\0';
+			parse_input(input, args);
+			if (_strcmp(args[0], "/bin/exit") == 0)
+				handle_exit_command(args, input, first);
+			if (args != 0)
 			{
-				if (!_isspace(*input) && _strcmp(args[0], "cd") != 0)
-					free(args[0]);
+				run_command(args, big_env);
 			}
 		}
 	}

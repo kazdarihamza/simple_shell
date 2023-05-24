@@ -1,37 +1,39 @@
 #include "shell.h"
+
 /**
  * run_command - executes the command based on the given array
- * @ls: the given array
+ * @cmd: the given array
  * @env: the environment variables array
  * Return: 0 on success
  */
-int run_command(char **ls, char **env)
+
+int run_command(char **cmd, char **env)
 {
 		int i = 0;
 
 	while (env[i] != NULL)
 		i++;
-	if (ls[0] == NULL)
+	if (cmd[0] == NULL)
 		return (0);
-	if (_strcmp(ls[0], "/bin/echo") == 0)
+	if (_strcmp(cmd[0], "/bin/echo") == 0)
 	{
-		execute_echo_command(ls, env);
-		return (0);
-	}
-	if (strcmp(ls[0], "cd") == 0)
-	{
-		execute_cd_command(ls, env);
+		execute_echo_command(cmd, env);
 		return (0);
 	}
-	else if (_strcmp(ls[0], "/bin/setenv") == 0)
+	if (strcmp(cmd[0], "cd") == 0)
 	{
-		execute_setenv_command(ls, env);
+		execute_cd_command(cmd, env);
+		return (0);
 	}
-	else if (_strcmp(ls[0], "/bin/unsetenv") == 0)
+	else if (_strcmp(cmd[0], "/bin/setenv") == 0)
 	{
-		execute_unsetenv_command(ls, env);
+		execute_setenv_command(cmd, env);
 	}
-	else if (_strcmp(ls[0], "/bin/env") == 0)
+	else if (_strcmp(cmd[0], "/bin/unsetenv") == 0)
+	{
+		execute_unsetenv_command(cmd, env);
+	}
+	else if (_strcmp(cmd[0], "/bin/env") == 0)
 	{
 		i--;
 		while (i >= 0)
@@ -42,63 +44,63 @@ int run_command(char **ls, char **env)
 		}
 	}
 	else
-		execute_external_command(ls, env);
+		handle_commands(cmd, env);
 	return (0);
 }
 
 /**
  * execute_setenv_command - executes the command based on the given array
- * @ls: the given array
+ * @cmd: the given array
  * @env: the environment variables array
  */
 
-void execute_setenv_command(char **ls, char **env)
+void execute_setenv_command(char **cmd, char **env)
 {
-	if (ls[1] != NULL && ls[2] != NULL)
+	if (cmd[1] != NULL && cmd[2] != NULL)
 	{
-		if (_setenv(ls[1], ls[2], 1, env) == -1)
-			perror(ls[0]);
+		if (_setenv(cmd[1], cmd[2], 1, env) == -1)
+			perror(cmd[0]);
 	}
 	else
 	{
-		print_string(ls[1]);
+		print_string(cmd[1]);
 		print_string(": not enough arguments\n");
 	}
 }
 
 /**
  * execute_unsetenv_command - executes the command based on the given array
- * @ls: the given array
+ * @cmd: the given array
  * @env: the environment variables array
  */
-void execute_unsetenv_command(char **ls, char **env)
+void execute_unsetenv_command(char **cmd, char **env)
 {
-	if (ls[1] != NULL && ls[2] == NULL)
+	if (cmd[1] != NULL && cmd[2] == NULL)
 	{
-		if (_unsetenv(ls[1], env) == -1)
-			perror(ls[0]);
+		if (_unsetenv(cmd[1], env) == -1)
+			perror(cmd[0]);
 	}
 
 	else
 	{
-		print_string(ls[1]);
+		print_string(cmd[1]);
 		print_string(": too many arguments\n");
 	}
 }
 
 /**
  * execute_echo_command - executes the echo command with environment variables
- * @ls: the command arguments array
+ * @cmd: the command arguments array
  * @env: environment
  */
-void execute_echo_command(char **ls, char **env)
+void execute_echo_command(char **cmd, char **env)
 {
 	int i;
 	char *env_var_value = NULL;
 
-	for (i = 1; ls[i] != NULL; i++)
+	for (i = 1; cmd[i] != NULL; i++)
 	{
-		char *arg = ls[i];
+		char *arg = cmd[i];
 
 		if (arg[0] == '$' && strcmp(arg, "$PWD") == 0)
 		{
@@ -125,7 +127,7 @@ void execute_echo_command(char **ls, char **env)
 			cut_string_two(arg, '\'', arg);
 			print_string(arg);
 		}
-		if (ls[i + 1] != NULL)
+		if (cmd[i + 1] != NULL)
 			print_string(" ");
 	}
 	print_string("\n");
@@ -133,13 +135,13 @@ void execute_echo_command(char **ls, char **env)
 
 /**
  * execute_cd_command - executes the cd command with directory change
- * @ls: the command arguments array
+ * @cmd: the command arguments array
  * @env: environment
  */
-void execute_cd_command(char **ls, char **env)
+void execute_cd_command(char **cmd, char **env)
 {
 	static char previous_directory[PATH_MAX];
-	char *arg = ls[1];
+	char *arg = cmd[1];
 	char *env_var_value;
 
 	if (arg == NULL)

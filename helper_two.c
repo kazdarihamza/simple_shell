@@ -43,7 +43,7 @@ int _strlen(const char *str)
 int _isspace(int c)
 {
 	return (c == ' ' || c == '\t' || c == '\n' ||
-		c == '\r' || c == '\f' || c == '\v' || c == '\n');
+		c == '\r' || c == '\f' || c == '\v');
 }
 /**
  * _atoi - converts a string to an integer

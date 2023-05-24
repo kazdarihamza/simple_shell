@@ -25,10 +25,7 @@ void process_input_words(char *input, char **ls, int word_count)
 	char bin[] = "/bin/", *word, *command = NULL, *end;
 
 	if (_strlen(input) == (int)_strspn(input, " ") || input == NULL)
-	{
-		free(input);
 		return;
-	}
 	while (*input == ' ')
 		input++;
 	end = input + _strlen(input) - 1;

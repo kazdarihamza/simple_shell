@@ -31,7 +31,6 @@ int main(int ac, char **args)
 			print_string("#cisfun$ ");
 		chars_read = _getline(&input, &n, stdin);
 		if (chars_read == -1)
-		{
 			free_all(input, args);
 		if (_strcmp(input, "\n") != 0)
 		{
@@ -40,9 +39,7 @@ int main(int ac, char **args)
 			if (_strcmp(args[0], "/bin/exit") == 0)
 				handle_exit_command(args, input, first);
 			if (args != 0)
-			{
 				run_command(args, big_env);
-			}
 		}
 	}
 	return (0);

@@ -11,7 +11,7 @@ void free_all(char *input, char **args)
 	(void)args;
 	if ((isatty(STDIN_FILENO)))
 	{
-		if (_strcmp(input, "\n") != 0 || input != NULL)
+		if (input)
 			free(input);
 	}
 	if (!(isatty(STDIN_FILENO)))

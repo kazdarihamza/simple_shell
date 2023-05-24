@@ -28,7 +28,7 @@ int _strncmp(const char *str1, const char *str2, size_t n)
  */
 char *_getenv(const char *name, char **env)
 {
-	int name_length = strlen(name);
+	int name_length = _strlen(name);
 	int i = 0;
 
 	for (; env[i] != NULL; i++)
@@ -64,7 +64,7 @@ void cut_string(char *str, char ch, char *result)
 {
 	int dst = 0;
 	int src = 0;
-	int len = strlen(str);
+	int len = _strlen(str);
 
 	for (; src < len; src++)
 	{
@@ -87,7 +87,7 @@ void cut_string_two(char *str, char ch, char *result)
 {
 	int dst = 0;
 	int src = 0;
-	int len = strlen(str);
+	int len = _strlen(str);
 
 	for (; src < len; src++)
 	{

@@ -8,8 +8,7 @@
 
 void free_all(char *input, char **args)
 {
-	if (!(isatty(STDIN_FILENO)))
-		free(args[0]);
+	(void)args;
 	if ((isatty(STDIN_FILENO)))
 		free(input);
 	if (!(isatty(STDIN_FILENO)))

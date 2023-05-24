@@ -28,3 +28,31 @@ int main(int ac, char **args)
 	big_env[j] = NULL;
 	(void)ac;
 	signal(SIGINT, ctrlc_avoid);
+	while (true)
+	{
+		if ((isatty(STDIN_FILENO)))
+			print_string("($) ");
+		chars_read = _getline(&input, &n, stdin);
+		if (chars_read == -1)
+		{
+			free_all(input, args);
+			if (!(isatty(STDIN_FILENO)))
+				exit(EXIT_SUCCESS);
+			exit(EXIT_FAILURE);
+		}
+		input[chars_read - 1] = '\0';
+		parse_input(input, args);
+		if (_strcmp(args[0], "/bin/exit") == 0)
+			handle_exit_command(args, input, first);
+		if (args != 0)
+		{
+			run_command(args, big_env);
+			if ((isatty(STDIN_FILENO)))
+				{
+					if(!_isspace(*input) && _strcmp(args[0], "cd") != 0)
+						free(args[0]);
+				}
+		}
+	}
+	return (0);
+}

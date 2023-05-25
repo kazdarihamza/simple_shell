@@ -39,7 +39,7 @@ int main(int ac, char **args)
 		}
 		input[chars_read - 1] = '\0';
 		parse_input(input, args);
-		if (_strcmp(args[0], "/bin/exit") == 0)
+		if (_strcmp(args[0], "exit") == 0)
 			handle_exit_command(args, input, first);
 		if (args != 0)
 			run_command(args, big_env);

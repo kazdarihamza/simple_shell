@@ -75,7 +75,7 @@ void handle_exit_command(char **args, char *input, char *first)
 	{
 		if (!(isatty(STDIN_FILENO)))
 			free(input);
-		exit(EXIT_SUCCESS);
+		exit(0);
 	}
 	else
 	{

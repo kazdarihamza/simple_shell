@@ -37,7 +37,7 @@ enum MemoryAllocationType
 };
 
 /*the main functions*/
-int run_command(char **ls, char **env,char *input);
+int run_command(char **ls, char **env, char *input);
 void parse_input(char *input, char **ls);
 void process_input_words(char *input, char **ls, int word_count);
 void execute_echo_command(char **ls, char **env);

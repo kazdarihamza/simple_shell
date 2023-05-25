@@ -8,10 +8,10 @@
 
 void free_all(char *input, char **args)
 {
-	if ((!(isatty(STDIN_FILENO)) && *input != '\0') ||
-	(checkMemoryAllocation(input) == MALLOC))
+	if (checkMemoryAllocation(input) == MALLOC &&
+	checkMemoryAllocation(input) == MALLOC)
 		free(input);
-	if ((!(isatty(STDIN_FILENO)) || input == NULL) &&
-	(checkMemoryAllocation(args[0]) == MALLOC))
+	if (checkMemoryAllocation(args[0]) == MALLOC &&
+	checkMemoryAllocation(input) != MALLOC)
 		free(args[0]);
 }

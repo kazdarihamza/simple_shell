@@ -42,7 +42,7 @@ char *_strchr(const char *str, int character)
  * @ls: the command arguments array
  * @env: the environment variables array
  */
-void execute_external_command(char **ls, char **env)
+void execute_external_command(char **ls, char **env, char *input)
 {
 	pid_t pid;
 	char *command = ls[0];
@@ -68,6 +68,7 @@ void execute_external_command(char **ls, char **env)
 		waitpid(pid, &status, 0);
 		if (!WIFEXITED(status) || WEXITSTATUS(status) != 0)
 		{
+			free(input);
 			exit(2);
 		}
 	}

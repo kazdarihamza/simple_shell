@@ -7,7 +7,7 @@
  * Return: 0 on success
  */
 
-int run_command(char **cmd, char **env)
+int run_command(char **cmd, char **env,char *input)
 {
 		int i = 0;
 
@@ -44,7 +44,7 @@ int run_command(char **cmd, char **env)
 		}
 	}
 	else
-		handle_commands(cmd, env);
+		handle_commands(cmd, env, input);
 	return (0);
 }
 

@@ -34,11 +34,11 @@ int testStringInFolder(char *folderPath, char *searchString)
  * @env: environ
  */
 
-void handle_commands(char **cmd, char **env)
+void handle_commands(char **cmd, char **env, char *input)
 {
 	if (testStringInFolder("/bin/", cmd[0]))
 	{
-		execute_external_command(cmd, env);
+		execute_external_command(cmd, env, input);
 		if ((isatty(STDIN_FILENO)))
 			free(cmd[0]);
 	}

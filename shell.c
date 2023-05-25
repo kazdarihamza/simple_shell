@@ -42,14 +42,8 @@ int main(int ac, char **args)
 		if (_strcmp(args[0], "/bin/exit") == 0)
 			handle_exit_command(args, input, first);
 		if (args != 0)
-		{
 			run_command(args, big_env);
-			if ((isatty(STDIN_FILENO)))
-				{
-					if(!_isspace(*input) && _strcmp(args[0], "cd") != 0)
-						free(args[0]);
-				}
-		}
+
 	}
 	return (0);
 }

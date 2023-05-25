@@ -32,6 +32,7 @@ int testStringInFolder(char *folderPath, char *searchString)
  * handle_commands - handle command not found
  * @cmd: command
  * @env: environ
+ * @input: the input
  */
 
 void handle_commands(char **cmd, char **env, char *input)

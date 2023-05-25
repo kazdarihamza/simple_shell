@@ -96,6 +96,7 @@ void handle_exit_command(char **args, char *input, char *first)
 		}
 		if (!(isatty(STDIN_FILENO)))
 			free(input);
+		free(args[0]);
 		exit(status);
 	}
 }

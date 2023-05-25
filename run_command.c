@@ -4,10 +4,11 @@
  * run_command - executes the command based on the given array
  * @cmd: the given array
  * @env: the environment variables array
+ * @input: the input
  * Return: 0 on success
  */
 
-int run_command(char **cmd, char **env,char *input)
+int run_command(char **cmd, char **env, char *input)
 {
 		int i = 0;
 

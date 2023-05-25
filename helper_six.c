@@ -41,6 +41,7 @@ char *_strchr(const char *str, int character)
  * execute_external_command - executes a command using fork and execve
  * @ls: the command arguments array
  * @env: the environment variables array
+ * @input: the input
  */
 void execute_external_command(char **ls, char **env, char *input)
 {

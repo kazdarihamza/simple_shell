@@ -75,6 +75,7 @@ void handle_exit_command(char **args, char *input, char *first)
 	{
 		if (!(isatty(STDIN_FILENO)))
 			free(input);
+		free(args[0]);
 		exit(0);
 	}
 	else
@@ -88,7 +89,9 @@ void handle_exit_command(char **args, char *input, char *first)
 				_strlen(": 1: exit: Illegal number: "));
 			write(2, args[1], _strlen(args[1]));
 			write(2, "\n", 1);
-			free(input);
+			if (!(isatty(STDIN_FILENO)))
+				free(input);
+			free(args[0]);
 			exit(2);
 		}
 		if (!(isatty(STDIN_FILENO)))

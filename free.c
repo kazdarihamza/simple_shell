@@ -8,8 +8,7 @@
 
 void free_all(char *input, char **args)
 {
-	if (checkMemoryAllocation(input) == MALLOC &&
-	checkMemoryAllocation(input) == MALLOC)
+	if (checkMemoryAllocation(input) == MALLOC)
 		free(input);
 	if (checkMemoryAllocation(args[0]) == MALLOC &&
 	checkMemoryAllocation(input) != MALLOC)

@@ -42,7 +42,7 @@ int main(int ac, char **args)
 		if (_strcmp(args[0], "/bin/exit") == 0)
 			handle_exit_command(args, input, first);
 		if (*input != '\0')
-			run_command(args, big_env, input);
+			run_command(args, big_env, input, first);
 
 	}
 	return (0);

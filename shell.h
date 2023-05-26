@@ -37,11 +37,11 @@ enum MemoryAllocationType
 };
 
 /*the main functions*/
-int run_command(char **ls, char **env, char *input);
+int run_command(char **ls, char **env, char *input, char *first);
 void parse_input(char *input, char **ls);
 void process_input_words(char *input, char **ls, int word_count);
 void execute_echo_command(char **ls, char **env);
-void execute_cd_command(char **ls, char **env);
+void execute_cd_command(char **ls, char **env, char *first);
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 void execute_external_command(char **ls, char **env, char *input);
 
@@ -82,5 +82,6 @@ void *_memcpy(void *dest, const void *src, size_t n);
 size_t malloc_usable_size(const void *ptr);
 int testStringInFolder(char *folderPath, char *searchString);
 void handle_commands(char **cmd, char **env, char *input);
+void handle_cd_error(char **cmd, char *first);
 
 #endif

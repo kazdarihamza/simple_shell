@@ -5,10 +5,11 @@
  * @cmd: the given array
  * @env: the environment variables array
  * @input: the input
+ * @first: first
  * Return: 0 on success
  */
 
-int run_command(char **cmd, char **env, char *input)
+int run_command(char **cmd, char **env, char *input, char *first)
 {
 		int i = 0;
 
@@ -23,7 +24,7 @@ int run_command(char **cmd, char **env, char *input)
 	}
 	if (strcmp(cmd[0], "cd") == 0)
 	{
-		execute_cd_command(cmd, env);
+		execute_cd_command(cmd, env, first);
 		return (0);
 	}
 	else if (_strcmp(cmd[0], "/bin/setenv") == 0)
@@ -138,8 +139,9 @@ void execute_echo_command(char **cmd, char **env)
  * execute_cd_command - executes the cd command with directory change
  * @cmd: the command arguments array
  * @env: environment
+ * @first: first
  */
-void execute_cd_command(char **cmd, char **env)
+void execute_cd_command(char **cmd, char **env, char *first)
 {
 	static char previous_directory[PATH_MAX];
 	char *arg = cmd[1];
@@ -158,8 +160,7 @@ void execute_cd_command(char **cmd, char **env)
 			print_string("\n");
 			chdir(previous_directory);
 		}
-	}
-	else
+	} else
 	{
 		if (getcwd(previous_directory, sizeof(previous_directory)) == NULL)
 		{
@@ -176,8 +177,8 @@ void execute_cd_command(char **cmd, char **env)
 			}
 			else if (arg[0] == '~')
 				chdir(_getenv("HOME", env));
-			if (access(arg, F_OK) != -1)
-				perror(arg);
+			else
+				handle_cd_error(cmd, first);
 		}
 	}
 }

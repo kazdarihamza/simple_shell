@@ -51,3 +51,16 @@ void handle_commands(char **cmd, char **env, char *input)
 			free(cmd[0]);
 	}
 }
+
+/**
+ * handle_cd_error - handles error for cd command
+ * @cmd: command
+ * @first: first
+*/
+void handle_cd_error(char **cmd, char *first)
+{
+	write(2, first, _strlen(first));
+	write(2, ": 1: cd: can't cd to ", _strlen(": 1: cd: can't cd to "));
+	write(2, cmd[1], _strlen(cmd[1]));
+	write(2, "\n", 1);
+}

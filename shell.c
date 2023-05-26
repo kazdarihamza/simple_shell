@@ -28,7 +28,7 @@ int main(int ac, char **args)
 	while (true)
 	{
 		if ((isatty(STDIN_FILENO)))
-			print_string("#cisfun$ ");
+			print_string("($) ");
 		chars_read = _getline(&input, &n, stdin);
 		if (chars_read == -1)
 		{
